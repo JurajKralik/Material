@@ -1,7 +1,7 @@
 sap.ui.require(["sap/ui/test/Opa5", "sap/ui/test/actions/Press"], function (Opa5, Press) {
     "use strict";
 
-    const sViewName = "com.myorg.Material.view.MainView";
+    const sViewName = "com.myorg.Material.view.OrderDetails";
 
     Opa5.createPageObjects({
         onTheMainPage: {

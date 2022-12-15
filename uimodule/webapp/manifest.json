@@ -9,6 +9,22 @@
     },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
+    "dataSources": {
+      "ZPM2_MATERIAL_SRV":{
+        "uri": "/sap/opu/odata/sap/ZPM2_MATERIAL_SRV",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPM2_SRV":{
+        "uri": "/sap/opu/odata/sap/ZPM2_SRV",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0"
+        }
+      }
+    },
     "resources": "resources.json",
     "sourceTemplate": {
       "id": "@sap-ux/fiori-freestyle-writer:basic",
@@ -50,6 +66,19 @@
         "settings": {
           "bundleName": "com.myorg.Material.i18n.i18n"
         }
+      },
+      "core": {
+        "dataSource": "ZPM2_SRV",
+        "settings": {
+          "defaultBindingMode": "OneWay",
+          "useBatch": false
+        }
+      },
+      "material": {
+        "dataSource": "ZPM2_MATERIAL_SRV",
+        "settings": {
+          "defaultBindingMode": "OneWay"
+        }
       }
     },
     "resources": {
@@ -66,33 +95,46 @@
         "async": true,
         "viewPath": "com.myorg.Material.view",
         "controlAggregation": "pages",
-        "controlId": "app",
-        "clearControlAggregation": false
+        "controlId": "app"
       },
       "routes": [
         {
-          "name": "RouteMainView",
+          "name": "RouteOrderSelection",
           "pattern": ":?query:",
+          "targetControl": "page",
           "target": [
-            "TargetMainView"
+            "TargetOrderSelection"
+          ]
+        },
+        {
+          "name": "RouteOrderDetails",
+          "pattern": "OrderDetails/{orderNumber}",
+          "target": [
+            "TargetOrderDetails"
           ]
         }
       ],
       "targets": {
-        "TargetMainView": {
+        "TargetOrderSelection": {
           "viewType": "XML",
           "transition": "slide",
-          "clearControlAggregation": false,
-          "viewId": "MainView",
-          "viewName": "MainView"
+          "viewId": "OrderSelection",
+          "viewName": "OrderSelection",
+          "viewLevel": 0
+        },
+          "TargetOrderDetails": {
+          "viewType": "XML",
+          "transition": "slide",
+          "viewId": "OrderDetails",
+          "viewName": "OrderDetails",
+          "viewLevel": 1
         }
-      }
-    },
+      },
     "rootView": {
       "viewName": "com.myorg.Material.view.App",
       "type": "XML",
       "async": true,
       "id": "App"
     }
-  }
+  }}
 }

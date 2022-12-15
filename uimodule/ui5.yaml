@@ -21,3 +21,11 @@ server:
       configuration:
         port: 35729
         path: uimodule/webapp
+    - name: ui5-middleware-simpleproxy
+      mountPath: /sap/opu/odata/sap/
+      afterMiddleware: compression
+      configuration:
+        baseUri: https://fioridevhub.conti.de/sap/opu/odata/sap/
+        strictSSL: false
+        httpHeaders:
+          Any-Header: AnyHeader

@@ -1,0 +1,33 @@
+<mvc:View
+	controllerName="com.myorg.Material.controller.OrderSelection"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+	displayBlock="true"
+	height="100%"
+	busyIndicatorDelay="0"
+    > <Page id="page" title="{i18n>title}">
+
+        <content>
+            <l:VerticalLayout class="sapUiContentPadding" width="100%">
+                <Label text="Order" labelFor="orderInput" />
+                <Input
+                    id="orderInput"
+                    placeholder="Enter order"
+                    showSuggestion="true"
+                    suggestionItems="{/orderTypeSet}">
+                    <suggestionItems>
+                        <core:ListItem text="{id}" additionalText="{text}" />
+                    </suggestionItems>
+                </Input>
+            </l:VerticalLayout>
+        </content>
+        <footer>
+            <Toolbar>
+                <ToolbarSpacer/>
+                <Button text="{i18n>search.button}" press="onPressSearch" />
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>

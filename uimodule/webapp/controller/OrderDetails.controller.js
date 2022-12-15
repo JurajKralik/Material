@@ -6,7 +6,7 @@ sap.ui.define(
     function (Controller) {
         "use strict";
 
-        return Controller.extend("com.myorg.Material.controller.MainView", {
+        return Controller.extend("com.myorg.Material.controller.OrderDetails", {
             onInit: function () {},
         });
     }
