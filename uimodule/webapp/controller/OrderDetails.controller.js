@@ -1,12 +1,15 @@
-sap.ui.define(
-    ["./BaseController"],
-    /**
-     * @param {typeof sap.ui.core.mvc.Controller} Controller
-     */
-    function (Controller) {
+sap.ui.define([
+    "com/myorg/Material/controller/BaseController",
+    "sap/ui/model/json/JSONModel"
+], function(
+    BaseController,
+    JSONModel
+) {
         "use strict";
 
-        return Controller.extend("com.myorg.Material.controller.OrderDetails", {
+        return BaseController.extend("com.myorg.Material.controller.OrderDetails", {
+
+            
             onInit: function () {},
         });
     }

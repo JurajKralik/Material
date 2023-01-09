@@ -1,10 +1,78 @@
-<mvc:View controllerName="com.myorg.Material.controller.OrderDetails" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+<mvc:View controllerName="" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f" xmlns:l="sap.ui.layout">
+    <f:DynamicPage id="dynamicPageId" headerExpanded="{/headerExpanded}" toggleHeaderOnTitleClick="{/titleClickable}">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Header Title" />
+                </f:heading>
+                <f:content>
+                    <!-- DynamicPage Title -->
+                    <l:BlockLayout>
+                        <l:BlockLayoutRow>
+                            <l:BlockLayoutCell width="2">
+                                <VBox>
+                                    <!-- Workorder Type -->
+                                    <HBox>
+                                        <Label text="{i18n>label_workordertype}:" class="blockCellLabel" />
+                                        <Text text="{ path: 'workorder_type' }" />
+                                    </HBox>
+                                    <HBox>
+                                        <Text text="{ path: 'workorder_type',
+                                                  formatter: '.formatter.workordertype' }" class="sapUiTinyMarginLeft" />
+                                    </HBox>
 
-        <content>
-            <Table id="idProductsTable"
-                inset="false"
-                items="{
+                                    <!-- Activity Type -->
+                                    <HBox class="sapUiTinyMarginTop">
+                                        <Label text="{i18n>activity_type}:" class="blockCellLabel" />
+                                        <Text text="{ path: 'activity_type' }" />
+                                    </HBox>
+                                    <HBox>
+                                        <Text text="{ path: 'activity_type',
+                                              formatter: '.formatter.activitytype' }" class="sapUiTinyMarginLeft" />
+                                    </HBox>
+                                </VBox>
+                            </l:BlockLayoutCell>
+
+                            <l:BlockLayoutCell width="3">
+                                <VBox>
+                                    <HBox>
+                                        <Label text="{i18n>PlannerGroup}:" class="blockCellLabel" />
+                                        <Text text="{ path: 'plannergroup',
+                                                  formatter: '.formatter.plannergroup' }" />
+                                    </HBox>
+                                    <HBox>
+                                        <Label text="{= !!${mainworkcenter} ? ${i18n>MainWorkCenter} + ':' : '' }" class="blockCellLabel" />
+                                        <Text text="{ path: 'mainworkcenter' }" />
+                                    </HBox>
+                                    <HBox>
+                                        <Label text="{= !!${suitability} ? ${i18n>Suitability} + ':' : '' }" class="blockCellLabel" />
+                                        <Text text="{ path: 'suitability' }" />
+                                    </HBox>
+                                </VBox>
+                            </l:BlockLayoutCell>
+
+                            <l:BlockLayoutCell width="2">
+                                <VBox>
+                                    <HBox>
+                                        <Label text="{i18n>Reported_By}:" class="blockCellLabel" />
+                                        <Text text="{ path: 'reported_by' }" />
+                                    </HBox>
+                                    <HBox>
+                                        <Label text="{i18n>Created_At}:" class="blockCellLabel" />
+                                        <Text text="{ path: 'created',
+                                                  type: 'sap.ui.model.type.DateTime',
+                                                  formatOptions: {style: 'short'}
+                                    }" />
+                                    </HBox>
+                                </VBox>
+                            </l:BlockLayoutCell>
+                        </l:BlockLayoutRow>
+                    </l:BlockLayout>
+                </f:content>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:content>
+            <Table id="idProductsTable" inset="false" items="{
                     path: '/Material',
                     sorter: {
                         path: 'Name'
@@ -13,75 +81,35 @@
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>
-                            <Title text="Products" level="H2"/>
+                            <Title text="Material" level="H2" />
                             <ToolbarSpacer />
-                            <ComboBox id="idPopinLayout"
-                                placeholder="Popin layout options"
-                                change="onPopinLayoutChanged">
-                                <items>
-                                    <core:Item  text="Block"
-                                        key="Block"/>
-                                    <core:Item  text="Grid Large"
-                                        key="GridLarge"/>
-                                    <core:Item  text="Grid Small"
-                                        key="GridSmall"/>
-                                </items>
-                            </ComboBox>
-                            <Label text="Sticky options:" />
-                            <CheckBox text="ColumnHeaders"
-                                select="onSelect"/>
-                            <CheckBox text="HeaderToolbar"
-                                select="onSelect"/>
-                            <CheckBox text="InfoToolbar"
-                                select="onSelect"/>
-                            <ToggleButton id="toggleInfoToolbar"
-                                text="Hide/Show InfoToolbar"
-                                press="onToggleInfoToolbar" />
                         </content>
                     </OverflowToolbar>
                 </headerToolbar>
-                <infoToolbar>
-                    <OverflowToolbar>
-                        <Label text="Wide range of available products"/>
-                    </OverflowToolbar>
-                </infoToolbar>
+                <infoToolbar />
                 <columns>
-                    <Column
-                        width="12em">
+                    <Column width="12em">
                         <Text text="Product" />
                     </Column>
-                    <Column
-                        minScreenWidth="Tablet"
-                        demandPopin="true">
+                    <Column minScreenWidth="Tablet" demandPopin="true">
                         <Text text="Supplier" />
                     </Column>
-                    <Column
-                        minScreenWidth="Desktop"
-                        demandPopin="true"
-                        hAlign="End">
+                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
                         <Text text="Dimensions" />
                     </Column>
-                    <Column
-                        minScreenWidth="Desktop"
-                        demandPopin="true"
-                        hAlign="Center">
+                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="Center">
                         <Text text="Weight" />
                     </Column>
-                    <Column
-                        hAlign="End">
+                    <Column hAlign="End">
                         <Text text="Price" />
                     </Column>
                 </columns>
                 <items>
                     <ColumnListItem vAlign="Middle">
                         <cells>
-                            <ObjectIdentifier
-                                title="{Name}"
-                                text="{ProductId}"/>
-                            <Text
-                                text="{SupplierName}" />
-                            <Text
-                                text="{Width} x {Depth} x {Height} {DimUnit}" />
+                            <ObjectIdentifier title="{Name}" text="{ProductId}" />
+                            <Text text="{SupplierName}" />
+                            <Text text="{Width} x {Depth} x {Height} {DimUnit}" />
                             <ObjectNumber
                                 number="{WeightMeasure}"
                                 unit="{WeightUnit}"
@@ -91,18 +119,20 @@
                                         {path: 'WeightUnit'}
                                     ],
                                     formatter: 'sap.m.sample.Table.Formatter.weightState'
-                                }" />
+                                }"
+                            />
                             <ObjectNumber
-                                    number="{
+                                number="{
                                         parts:[{path:'Price'},{path:'CurrencyCode'}],
                                         type: 'sap.ui.model.type.Currency',
                                         formatOptions: {showMeasure: false}
                                     }"
-                                    unit="{CurrencyCode}" />
+                                unit="{CurrencyCode}"
+                            />
                         </cells>
                     </ColumnListItem>
                 </items>
             </Table>
-        </content>
-    </Page>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>

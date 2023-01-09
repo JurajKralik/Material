@@ -1,27 +1,27 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
+    "com/myorg/Material/controller/BaseController",
     "sap/ui/model/json/JSONModel"
 ], function(
-	Controller,
+    BaseController,
     JSONModel
 ) {
 	"use strict";
 
-	return Controller.extend("com.myorg.Material.controller.OrderSelection", {
+	return BaseController.extend("com.myorg.Material.controller.OrderSelection", {
         /**
          * @override
          */
-        onInit: function() {
+        /* onInit: function() {
             Controller.prototype.onInit.apply(this, arguments);
 
             var materialModel = this.getView().getModel("material");
             materialModel.callFunction("/GetOrderTypes",{
                 method: "GET", success : function(orderTypes){this.getView().setModel(new JSONModel(orderTypes), "orderTypes")}
             })
-        },
+        }, */
         onPressSearch: function() {
             var orderNumber = this.getView().byId("orderInput").getValue();
-            this.getRouter().navTo("TargetOrderDetails", orderNumber);
+            this.getRouter().navTo("RouteOrderDetails", {orderNumber: orderNumber});
         }
 	});
 })

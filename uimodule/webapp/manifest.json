@@ -10,14 +10,14 @@
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "dataSources": {
-      "ZPM2_MATERIAL_SRV":{
+      "ZPM2_MATERIAL_SRV": {
         "uri": "/sap/opu/odata/sap/ZPM2_MATERIAL_SRV",
         "type": "OData",
         "settings": {
           "odataVersion": "2.0"
         }
       },
-      "ZPM2_SRV":{
+      "ZPM2_SRV": {
         "uri": "/sap/opu/odata/sap/ZPM2_SRV",
         "type": "OData",
         "settings": {
@@ -95,15 +95,15 @@
         "async": true,
         "viewPath": "com.myorg.Material.view",
         "controlAggregation": "pages",
-        "controlId": "app"
+        "controlId": "app",
+        "clearControlAggregation": false
       },
       "routes": [
         {
-          "name": "RouteOrderSelection",
+          "name": "RouteMainView",
           "pattern": ":?query:",
-          "targetControl": "page",
           "target": [
-            "TargetOrderSelection"
+            "TargetMainView"
           ]
         },
         {
@@ -115,26 +115,27 @@
         }
       ],
       "targets": {
-        "TargetOrderSelection": {
+        "TargetMainView": {
           "viewType": "XML",
           "transition": "slide",
-          "viewId": "OrderSelection",
-          "viewName": "OrderSelection",
-          "viewLevel": 0
+          "clearControlAggregation": false,
+          "viewId": "MainView",
+          "viewName": "OrderSelection"
         },
-          "TargetOrderDetails": {
+        "TargetOrderDetails": {
           "viewType": "XML",
           "transition": "slide",
+          "clearControlAggregation": false,
           "viewId": "OrderDetails",
-          "viewName": "OrderDetails",
-          "viewLevel": 1
+          "viewName": "OrderDetails"
         }
-      },
+      }
+    },
     "rootView": {
       "viewName": "com.myorg.Material.view.App",
       "type": "XML",
       "async": true,
       "id": "App"
     }
-  }}
+  }
 }
